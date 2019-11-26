@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Webpack-html-template</title>
+  </head>
+  <body>
+    <!-- header -->
+    <%= require('html-loader!./header.html') %>
+
+    <!-- content -->
+    <%= require(`html-loader!../pages/${htmlWebpackPlugin.options.filename}`) %>
+
+    <!-- footer -->
+    <%= require('html-loader!./footer.html') %>
+  </body>
+</html>
