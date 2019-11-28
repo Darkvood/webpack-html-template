@@ -54,6 +54,10 @@ module.exports = {
         from: resolve(__dirname, "src/assets"),
         to: resolve(__dirname, "dist/assets"),
         ignore: ["styles/**/*"]
+      },
+      {
+        from: resolve(__dirname, "src/layout/favicon.ico"),
+        to: resolve(__dirname, "dist/favicon.ico")
       }
     ])
   ]
