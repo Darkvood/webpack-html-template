@@ -1,12 +1,15 @@
 const resolve = require("path").resolve;
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackHarddiskPlugin = require("html-webpack-harddisk-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 const getPages = require("./libs/getPages");
 
+const mode = process.env.NODE_ENV;
+
 module.exports = {
-  mode: process.env.NODE_ENV,
+  mode,
   entry: resolve(__dirname, "src/index.js"),
   output: {
     path: resolve(__dirname, "dist"),
@@ -28,8 +31,8 @@ module.exports = {
         }
       },
       {
-        test: /\.(css)$/,
-        use: ["css-loader"]
+        test: /\.(css|less)$/,
+        use: [MiniCssExtractPlugin.loader, "css-loader", "less-loader"]
       }
     ]
   },
@@ -43,11 +46,14 @@ module.exports = {
     new CleanWebpackPlugin(),
     ...getPages(),
     new HtmlWebpackHarddiskPlugin(),
+    new MiniCssExtractPlugin({
+      filename: "assets/styles/main.css"
+    }),
     new CopyWebpackPlugin([
       {
         from: resolve(__dirname, "src/assets"),
         to: resolve(__dirname, "dist/assets"),
-        ignore: []
+        ignore: ["styles/**/*"]
       }
     ])
   ]
