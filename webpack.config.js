@@ -33,6 +33,17 @@ module.exports = {
       {
         test: /\.(css|less)$/,
         use: [MiniCssExtractPlugin.loader, "css-loader", "less-loader"]
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              name: "[path][name].[ext]"
+            }
+          }
+        ]
       }
     ]
   },
@@ -51,9 +62,8 @@ module.exports = {
     }),
     new CopyWebpackPlugin([
       {
-        from: resolve(__dirname, "src/assets"),
-        to: resolve(__dirname, "dist/assets"),
-        ignore: ["styles/**/*"]
+        from: resolve(__dirname, "src/static"),
+        to: resolve(__dirname, "dist/static")
       },
       {
         from: resolve(__dirname, "src/layout/favicon.ico"),
