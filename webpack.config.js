@@ -62,6 +62,11 @@ module.exports = {
     }),
     new CopyWebpackPlugin([
       {
+        from: resolve(__dirname, "src/assets"),
+        to: resolve(__dirname, "dist/assets"),
+        ignore: ["styles/**/*"]
+      },
+      {
         from: resolve(__dirname, "src/static"),
         to: resolve(__dirname, "dist/static")
       },
